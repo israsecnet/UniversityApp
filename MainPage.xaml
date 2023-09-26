@@ -3,39 +3,28 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="UniversityApp.MainPage">
 
-    <ScrollView>
+    <ScrollView >
         <VerticalStackLayout>
             <ScrollView Orientation="Horizontal">
-                <HorizontalStackLayout Spacing="15" Padding="20" BackgroundColor="Blue" HorizontalOptions="CenterAndExpand">
-                    <RadioButton Content="Term 1" Padding="5" BackgroundColor="Yellow" TextColor="Black" CornerRadius="5"></RadioButton>
-                    <RadioButton Content="Term 2" Padding="5" BackgroundColor="Yellow" TextColor="Black" CornerRadius="5"></RadioButton>
-                    <RadioButton Content="Term 3" Padding="5" BackgroundColor="Yellow" TextColor="Black" CornerRadius="5"></RadioButton>
-                    <RadioButton Content="Term 4" Padding="5" BackgroundColor="Yellow" TextColor="Black" CornerRadius="5"></RadioButton>
+                <HorizontalStackLayout x:Name="termStack" Spacing="15" Padding="20">
                 </HorizontalStackLayout>
             </ScrollView>
             <HorizontalStackLayout Spacing="50" HorizontalOptions="Center">
-                <Entry Text="Term Title" HorizontalTextAlignment="Center" TextTransform="Uppercase" FontAttributes="Bold" FontSize="32" IsReadOnly="False"/>
+                <Entry x:Name="termTitle" Text="Term Title" HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="32" TextChanged="termTitleChange"/>
             </HorizontalStackLayout>
             <Border Stroke="Blue" StrokeThickness="2" Padding="5">
                 <HorizontalStackLayout HorizontalOptions="Center" BackgroundColor="White" Spacing="50">
                     <VerticalStackLayout>
                         <Label Text="Start Date:" HorizontalTextAlignment="Center"  FontSize="22"/>
-                        <DatePicker ></DatePicker>
+                        <DatePicker x:Name="termStart" DateSelected="termStart_DateSelected"></DatePicker>
                     </VerticalStackLayout>
                     <VerticalStackLayout>
                         <Label Text="End Date:" HorizontalTextAlignment="Center"  FontSize="22"/>
-                        <DatePicker></DatePicker>
+                        <DatePicker x:Name="termEnd" DateSelected="termEnd_DateSelected"></DatePicker>
                     </VerticalStackLayout>
                 </HorizontalStackLayout>
             </Border>
-        
-            <VerticalStackLayout Spacing="30" Padding="20">
-                <Button Text="Course 1" Clicked="Button_Clicked"></Button>
-                <Button Text="Course 2"></Button>
-                <Button Text="Course 3"></Button>
-                <Button Text="Course 4"></Button>
-                <Button Text="Course 5"></Button>
-                <Button Text="Course 6"></Button>
+            <VerticalStackLayout x:Name="courseStack"  Spacing="30" Padding="20">
             </VerticalStackLayout>
 
         </VerticalStackLayout>

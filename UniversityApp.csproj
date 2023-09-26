@@ -51,6 +51,9 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
+		<PackageReference Include="SQLiteNetExtensions" Version="2.1.0" />
+		<PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="2.1.6" />
+		<PackageReference Include="SQLitePCLRaw.core" Version="2.1.6" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -58,5 +61,7 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
+
+	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionUniversityAppHideInfoBar="True" /></VisualStudio></ProjectExtensions>
 
 </Project>

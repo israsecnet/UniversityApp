@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace UniversityApp
 {
+
     public static class DataFunctions
     {
+        
         public static void createTable()
         {
             var databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "MyData.db");

@@ -16,7 +16,7 @@ namespace UniversityApp
         public int courseId { get; set; }
         public int termId { get; set; }
         public Course() { }
-        public Course(int termId, int instructorId, string courseName, DateTime start, DateTime end, string status, string courseDetails)
+        public Course(int termId, int instructorId, string courseName, DateTime start, DateTime end, string status, string courseDetails, int pa, int oa)
         {
             this.termId = termId;
             this.instructorId = instructorId;
@@ -25,6 +25,8 @@ namespace UniversityApp
             this.end = end;
             this.status = status;
             this.courseDetails = courseDetails;
+            this.pa = pa;
+            this.oa = oa;
         }
         
         public int instructorId { get; set; }
@@ -33,9 +35,10 @@ namespace UniversityApp
         public DateTime end { get; set; }
         public string status { get; set; }
         public string courseDetails { get; set; }
-        public Instructor instructor { get; set; }
-        public List<Note> notes { get; set; }
-        public List<Assessment> assessments { get; set; }
+        public int pa { get; set; }
+        public int oa {  get; set; }
+        public int startNotification {  get; set; }
+        public int endNotification { get; set; }
     }
 
     [SQLite.Table("Terms")]
@@ -53,7 +56,6 @@ namespace UniversityApp
         public string termName { get; set; }
         public DateTime start{ get; set;}
         public DateTime end { get; set; }
-        public List<Course> courses {  get; set; }
     }
 
     [SQLite.Table("Instructors")]

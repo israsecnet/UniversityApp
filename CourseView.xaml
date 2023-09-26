@@ -5,18 +5,18 @@
              Title="Course View">
     <ScrollView>
         <VerticalStackLayout Padding="5">
-            <Entry Text="Course Title" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="32"/>
+            <Entry x:Name="courseTitle" Text="Course Title" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="32"/>
             <HorizontalStackLayout Spacing="15">
                 <Label Text="Course Start Date:" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" FontSize="20"/>
-                <DatePicker HorizontalOptions="Center" VerticalOptions="Center"></DatePicker>
+                <DatePicker x:Name="courseStart" HorizontalOptions="Center" VerticalOptions="Center"></DatePicker>
             </HorizontalStackLayout>
             <HorizontalStackLayout Spacing="15">
                 <Label Text="Course End Date:" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" FontSize="20"/>
-                <DatePicker HorizontalOptions="Center" VerticalOptions="Center"></DatePicker>
+                <DatePicker x:Name="courseEnd" HorizontalOptions="Center" VerticalOptions="Center"></DatePicker>
             </HorizontalStackLayout>
             <HorizontalStackLayout>
                 <Label Text="Course Status" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" FontSize="20"/>
-                <Picker HorizontalOptions="Center" VerticalOptions="Center"></Picker>
+                <Picker x:Name="courseStatus" HorizontalOptions="Center" VerticalOptions="Center"></Picker>
             </HorizontalStackLayout>
             <Border Stroke="Gray"
                     StrokeThickness="3"
@@ -24,11 +24,11 @@
                 <VerticalStackLayout>
                     <Label Text="Course Instructor Information:" FontAttributes="Bold" FontSize="Medium" />
                     <Label Text="Instructor Name:" />
-                    <Entry Placeholder="Name" Text="Anna"/>
+                    <Entry x:Name="instructorName" Placeholder="Name" Text="Anna"/>
                     <Label Text="Instructor Phone:" />
-                    <Entry Placeholder="Phone"/>
+                    <Entry x:Name="instructorPhone" Placeholder="Phone"/>
                     <Label Text="Instructor Email:" />
-                    <Entry Placeholder="Email"/>
+                    <Entry x:Name="instructorEmail" Placeholder="Email"/>
                 </VerticalStackLayout>
             </Border>
             <Border Stroke="Gray"
@@ -61,7 +61,7 @@
                              Padding="5">
                         <VerticalStackLayout>
                             <Label Text="Performance Assessment" FontSize="Medium"/>
-                            <Entry Text="Assessment Name"/>
+                            <Entry x:Name="paName" Text="Assessment Name"/>
                             <Label Text="Start Date Notifications:" FontSize="Small" />
                             <Picker></Picker>
                             <Label Text="End Date Notifications:" FontSize="Small" />
@@ -73,7 +73,7 @@
                              Padding="5">
                         <VerticalStackLayout>
                             <Label Text="Objective Assessment" FontSize="Medium"/>
-                            <Entry Text="Assessment Name"/>
+                            <Entry x:Name="oaName" Text="Assessment Name"/>
                             <Label Text="Start Date Notifications:" FontSize="Small" />
                             <Picker></Picker>
                             <Label Text="End Date Notifications:" FontSize="Small" />
