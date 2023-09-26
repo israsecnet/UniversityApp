@@ -5,18 +5,18 @@
              Title="Course View">
     <ScrollView>
         <VerticalStackLayout Padding="5">
-            <Entry x:Name="courseTitle" Text="Course Title" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="32"/>
+            <Entry x:Name="courseTitle" Text="Course Title" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="32" TextChanged="courseTitle_TextChanged"/>
             <HorizontalStackLayout Spacing="15">
                 <Label Text="Course Start Date:" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" FontSize="20"/>
-                <DatePicker x:Name="courseStart" HorizontalOptions="Center" VerticalOptions="Center"></DatePicker>
+                <DatePicker x:Name="courseStart" HorizontalOptions="Center" VerticalOptions="Center" DateSelected="courseStart_DateSelected"></DatePicker>
             </HorizontalStackLayout>
             <HorizontalStackLayout Spacing="15">
                 <Label Text="Course End Date:" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" FontSize="20"/>
-                <DatePicker x:Name="courseEnd" HorizontalOptions="Center" VerticalOptions="Center"></DatePicker>
+                <DatePicker x:Name="courseEnd" HorizontalOptions="Center" VerticalOptions="Center" DateSelected="courseEnd_DateSelected"></DatePicker>
             </HorizontalStackLayout>
             <HorizontalStackLayout>
                 <Label Text="Course Status" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" FontSize="20"/>
-                <Picker x:Name="courseStatus" HorizontalOptions="Center" VerticalOptions="Center"></Picker>
+                <Picker x:Name="courseStatus" HorizontalOptions="Center" VerticalOptions="Center" SelectedIndexChanged="courseStatus_SelectedIndexChanged"></Picker>
             </HorizontalStackLayout>
             <Border Stroke="Gray"
                     StrokeThickness="3"

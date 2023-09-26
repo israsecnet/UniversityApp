@@ -5,22 +5,25 @@ namespace UniversityApp
 {
     public partial class MainPage : ContentPage
     {
-        public List<Term> terms = new List<Term>();
+        public static List<Term> terms = new List<Term>();
         public static Dictionary<Term, List<Course>> courses = new Dictionary<Term, List<Course>>();
         public static Dictionary<int, Course> courseList = new Dictionary<int, Course>();
         public static Dictionary<int, Assessment> assessments = new Dictionary<int, Assessment>();
         public static Dictionary<int, Instructor> instructors = new Dictionary<int, Instructor>();
         public static Dictionary<int, Note> notes = new Dictionary<int, Note>();
-        public Term termSelected;
+        public static Term termSelected;
         public static List<String> statusValues = new List<String>();
-        public string databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "MyData.db");
+        public static string databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "MyData.db");
         public MainPage()
         {
             InitializeComponent();
             //addExampleData();
             load_saved_data();
             load_ui(1);
-
+            statusValues.Add("In Progress");
+            statusValues.Add("Completed");
+            statusValues.Add("Dropped");
+            statusValues.Add("Plan to Take");
         }
 
         public void addExampleData()
@@ -128,9 +131,52 @@ namespace UniversityApp
             }
         }
 
+        public static void sync_db()
+        {
+            terms = new List<Term>();
+            courses = new Dictionary<Term, List<Course>>();
+            courseList = new Dictionary<int, Course>();
+            assessments = new Dictionary<int, Assessment>();
+            instructors = new Dictionary<int, Instructor>();
+            notes = new Dictionary<int, Note>();
+            var db = new SQLiteConnection(databasePath);
+            var tmpterm = db.Query<Term>("SELECT * FROM Terms");
+            foreach (Term term in tmpterm)
+            {
+                terms.Add(term);
+            }
+
+            foreach (Term term in terms)
+            {
+                var tmpcourses = db.Query<Course>($"SELECT * FROM Courses WHERE termId={term.termId}");
+                List<Course> CourseList = new List<Course>();
+                foreach (Course course in tmpcourses)
+                {
+                    CourseList.Add(course);
+                    courseList.Add(course.courseId, course);
+                }
+                courses.Add(term, CourseList);
+            }
+            var tmpAssessment = db.Query<Assessment>("SELECT * FROM Assessments");
+            foreach (Assessment assessment in tmpAssessment)
+            {
+                assessments.Add(assessment.assessmentId, assessment);
+            }
+            var tmpInstructor = db.Query<Instructor>("SELECT * FROM Instructors");
+            foreach (Instructor instructor in tmpInstructor)
+            {
+                instructors.Add(instructor.instructorId, instructor);
+            }
+            var tmpNote = db.Query<Note>("SELECT * FROM Notes");
+            foreach (Note note in tmpNote)
+            {
+                notes.Add(note.noteId, note);
+            }
+        }
 
 
-        private void load_ui(int term)
+
+        public void load_ui(int term)
         {
             termStack.Children.Clear();
             courseStack.Children.Clear();
@@ -168,7 +214,7 @@ namespace UniversityApp
             termTitle.Text = termSelected.termName;
 
         }
-        private bool checkDates(DateTime start, DateTime end)
+         public static bool checkDates(DateTime start, DateTime end)
         {
             if (end < start)
             {
