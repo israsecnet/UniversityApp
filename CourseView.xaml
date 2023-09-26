@@ -51,7 +51,38 @@
                     <Button Text="Display Notes"/>
                 </VerticalStackLayout>
             </Border>
-            <Button Text="Detailed View"></Button>
+            <Border  Stroke="Gray"
+                     StrokeThickness="3"
+                     Padding="5">
+                <VerticalStackLayout>
+                    <Label Text="Assessments" FontSize="Medium" FontAttributes="Bold"/>
+                    <Border  Stroke="Gray"
+                                StrokeThickness="3"
+                             Padding="5">
+                        <VerticalStackLayout>
+                            <Label Text="Performance Assessment" FontSize="Medium"/>
+                            <Entry Text="Assessment Name"/>
+                            <Label Text="Start Date Notifications:" FontSize="Small" />
+                            <Picker></Picker>
+                            <Label Text="End Date Notifications:" FontSize="Small" />
+                            <Picker></Picker>
+                        </VerticalStackLayout>
+                    </Border>
+                    <Border  Stroke="Gray"
+                            StrokeThickness="3"
+                             Padding="5">
+                        <VerticalStackLayout>
+                            <Label Text="Objective Assessment" FontSize="Medium"/>
+                            <Entry Text="Assessment Name"/>
+                            <Label Text="Start Date Notifications:" FontSize="Small" />
+                            <Picker></Picker>
+                            <Label Text="End Date Notifications:" FontSize="Small" />
+                            <Picker></Picker>
+                        </VerticalStackLayout>
+                    </Border>
+                </VerticalStackLayout>
+            </Border>
+            <Button Text="Detailed View" Padding="40"></Button>
         </VerticalStackLayout>
     </ScrollView>
     
