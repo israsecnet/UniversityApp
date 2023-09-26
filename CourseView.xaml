@@ -24,11 +24,11 @@
                 <VerticalStackLayout>
                     <Label Text="Course Instructor Information:" FontAttributes="Bold" FontSize="Medium" />
                     <Label Text="Instructor Name:" />
-                    <Entry x:Name="instructorName" Placeholder="Name" Text="Anna"/>
+                    <Entry x:Name="instructorName" TextChanged="instructorName_TextChanged" />
                     <Label Text="Instructor Phone:" />
-                    <Entry x:Name="instructorPhone" Placeholder="Phone"/>
+                    <Entry x:Name="instructorPhone" TextChanged="instructorPhone_TextChanged"/>
                     <Label Text="Instructor Email:" />
-                    <Entry x:Name="instructorEmail" Placeholder="Email"/>
+                    <Entry x:Name="instructorEmail" TextChanged="instructorEmail_TextChanged"/>
                 </VerticalStackLayout>
             </Border>
             <Border Stroke="Gray"

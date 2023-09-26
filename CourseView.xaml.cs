@@ -5,12 +5,13 @@ namespace UniversityApp;
 public partial class CourseView : ContentPage
 {
 	public Course currentCourse;
+    public Instructor currentInstructor;
 	public CourseView(int courseId)
 	{
 		InitializeComponent();
 		Course course = MainPage.courseList[courseId];
 		currentCourse = course;
-		Instructor instructor = MainPage.instructors[course.instructorId];
+		currentInstructor= MainPage.instructors[course.instructorId];
 		Assessment PA = MainPage.assessments[course.pa];
 		Assessment OA = MainPage.assessments[course.oa];
 		courseTitle.Text = course.courseName;
@@ -18,9 +19,9 @@ public partial class CourseView : ContentPage
 		courseEnd.Date = course.end;
 		courseStatus.ItemsSource = MainPage.statusValues;
 		courseStatus.SelectedItem = course.status;
-		instructorName.Text = instructor.instructorName;
-		instructorPhone.Text = instructor.instructorPhone;
-		instructorEmail.Text = instructor.instructorEmail;
+		instructorName.Text = currentInstructor.instructorName;
+		instructorPhone.Text = currentInstructor.instructorPhone;
+		instructorEmail.Text = currentInstructor.instructorEmail;
 		paName.Text = PA.assessmentName;
 		oaName.Text = OA.assessmentName;
 
@@ -62,5 +63,38 @@ public partial class CourseView : ContentPage
         currentCourse.courseName = courseTitle.Text;
         DataFunctions.updateCourse(db, currentCourse);
         MainPage.sync_db();
+    }
+
+    private void instructorEmail_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        var db = new SQLiteConnection(MainPage.databasePath);
+        if (e.NewTextValue != null)
+        {
+            currentInstructor.instructorEmail = e.NewTextValue;
+            DataFunctions.updateInstructor(db, currentInstructor);
+            MainPage.sync_db();
+        }
+    }
+
+    private void instructorPhone_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        var db = new SQLiteConnection(MainPage.databasePath);
+        if (e.NewTextValue != null)
+        {
+            currentInstructor.instructorPhone = e.NewTextValue;
+            DataFunctions.updateInstructor(db, currentInstructor);
+            MainPage.sync_db();
+        }
+    }
+
+    private void instructorName_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        var db = new SQLiteConnection(MainPage.databasePath);
+        if (e.NewTextValue != null)
+        {
+            currentInstructor.instructorName = e.NewTextValue;
+            DataFunctions.updateInstructor(db, currentInstructor);
+            MainPage.sync_db();
+        }
     }
 }
