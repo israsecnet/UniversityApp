@@ -4,37 +4,34 @@
              x:Class="UniversityApp.MainPage">
 
     <ScrollView>
-        <VerticalStackLayout
-            Spacing="25"
-            Padding="30,0"
-            VerticalOptions="Center">
-
-            <Image
-                Source="dotnet_bot.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="200"
-                HorizontalOptions="Center" />
-
-            <Label
-                Text="Hello, World!"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"
-                HorizontalOptions="Center" />
-
-            <Label
-                Text="Welcome to .NET Multi-platform App UI"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
-                FontSize="18"
-                HorizontalOptions="Center" />
-
-            <Button
-                x:Name="CounterBtn"
-                Text="Click me"
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Center" />
-
+        <VerticalStackLayout>
+            <ScrollView Orientation="Horizontal">
+                <HorizontalStackLayout Spacing="15" Padding="20" BackgroundColor="Blue" HorizontalOptions="CenterAndExpand">
+                    <RadioButton Content="Term 1" Padding="5" BackgroundColor="Yellow" TextColor="Black" CornerRadius="5"></RadioButton>
+                    <RadioButton Content="Term 2" Padding="5" BackgroundColor="Yellow" TextColor="Black" CornerRadius="5"></RadioButton>
+                    <RadioButton Content="Term 3" Padding="5" BackgroundColor="Yellow" TextColor="Black" CornerRadius="5"></RadioButton>
+                    <RadioButton Content="Term 4" Padding="5" BackgroundColor="Yellow" TextColor="Black" CornerRadius="5"></RadioButton>
+                </HorizontalStackLayout>
+            </ScrollView>
+            <HorizontalStackLayout Spacing="50">
+                <Label Text="Term Title" HorizontalTextAlignment="Start" TextTransform="Uppercase" FontAttributes="Bold" FontSize="32" Padding="20"/>
+                <Button BackgroundColor="Blue" TextColor="White" Text="Edit" WidthRequest="100" HeightRequest="50" HorizontalOptions="EndAndExpand"/>
+            </HorizontalStackLayout>
+            <Border Stroke="Blue" StrokeThickness="2" Padding="4">
+                <HorizontalStackLayout HorizontalOptions="Center" BackgroundColor="White" Spacing="50">
+                    <VerticalStackLayout>
+                        <Label Text="Start Date:" HorizontalTextAlignment="Center"  FontSize="22"/>
+                        <DatePicker ></DatePicker>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout>
+                        <Label Text="End Date:" HorizontalTextAlignment="Center"  FontSize="22"/>
+                        <DatePicker></DatePicker>
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
+            </Border>
+            
+            
+           
         </VerticalStackLayout>
     </ScrollView>
 
