@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UniversityApp.CourseView"
+             Title="Course View">
+    <ScrollView>
+        <VerticalStackLayout Padding="5">
+            <Entry Text="Course Title" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="32"/>
+            <HorizontalStackLayout Spacing="15">
+                <Label Text="Course Start Date:" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" FontSize="20"/>
+                <DatePicker HorizontalOptions="Center" VerticalOptions="Center"></DatePicker>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Spacing="15">
+                <Label Text="Course End Date:" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" FontSize="20"/>
+                <DatePicker HorizontalOptions="Center" VerticalOptions="Center"></DatePicker>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout>
+                <Label Text="Course Status" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" FontSize="20"/>
+                <Picker HorizontalOptions="Center" VerticalOptions="Center"></Picker>
+            </HorizontalStackLayout>
+            <Border Stroke="Gray"
+                    StrokeThickness="3"
+                    Padding="5">
+                <VerticalStackLayout>
+                    <Label Text="Course Instructor Information:" FontAttributes="Bold" FontSize="Medium" />
+                    <Label Text="Instructor Name:" />
+                    <Entry Placeholder="Name" Text="Anna"/>
+                    <Label Text="Instructor Phone:" />
+                    <Entry Placeholder="Phone"/>
+                    <Label Text="Instructor Email:" />
+                    <Entry Placeholder="Email"/>
+                </VerticalStackLayout>
+            </Border>
+            <Border Stroke="Gray"
+                    StrokeThickness="3"
+                    Padding="5">
+                <VerticalStackLayout>
+                    <Label Text="Notifications" FontSize="Medium" FontAttributes="Bold"/>
+                    <Label Text="Start Date Notifications:" FontSize="Small" />
+                    <Picker></Picker>
+                    <Label Text="End Date Notifications:" FontSize="Small" />
+                    <Picker></Picker>
+                </VerticalStackLayout>
+            </Border>
+            <Border Stroke="Gray"
+                    StrokeThickness="3"
+                    Padding="5">
+                <VerticalStackLayout Spacing="5">
+                    <Label Text="Course Notes" FontSize="Medium" FontAttributes="Bold"/>
+                    <Button Text="Add Note"/>
+                    <Button Text="Display Notes"/>
+                </VerticalStackLayout>
+            </Border>
+            <Button Text="Detailed View"></Button>
+        </VerticalStackLayout>
+    </ScrollView>
+    
+</ContentPage>

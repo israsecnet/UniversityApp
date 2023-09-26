@@ -13,11 +13,10 @@
                     <RadioButton Content="Term 4" Padding="5" BackgroundColor="Yellow" TextColor="Black" CornerRadius="5"></RadioButton>
                 </HorizontalStackLayout>
             </ScrollView>
-            <HorizontalStackLayout Spacing="50">
-                <Label Text="Term Title" HorizontalTextAlignment="Start" TextTransform="Uppercase" FontAttributes="Bold" FontSize="32" Padding="20"/>
-                <Button BackgroundColor="Blue" TextColor="White" Text="Edit" WidthRequest="100" HeightRequest="50" HorizontalOptions="EndAndExpand"/>
+            <HorizontalStackLayout Spacing="50" HorizontalOptions="Center">
+                <Entry Text="Term Title" HorizontalTextAlignment="Center" TextTransform="Uppercase" FontAttributes="Bold" FontSize="32" IsReadOnly="False"/>
             </HorizontalStackLayout>
-            <Border Stroke="Blue" StrokeThickness="2" Padding="4">
+            <Border Stroke="Blue" StrokeThickness="2" Padding="5">
                 <HorizontalStackLayout HorizontalOptions="Center" BackgroundColor="White" Spacing="50">
                     <VerticalStackLayout>
                         <Label Text="Start Date:" HorizontalTextAlignment="Center"  FontSize="22"/>
@@ -29,9 +28,16 @@
                     </VerticalStackLayout>
                 </HorizontalStackLayout>
             </Border>
-            
-            
-           
+        
+            <VerticalStackLayout Spacing="30" Padding="20">
+                <Button Text="Course 1" Clicked="Button_Clicked"></Button>
+                <Button Text="Course 2"></Button>
+                <Button Text="Course 3"></Button>
+                <Button Text="Course 4"></Button>
+                <Button Text="Course 5"></Button>
+                <Button Text="Course 6"></Button>
+            </VerticalStackLayout>
+
         </VerticalStackLayout>
     </ScrollView>
 
