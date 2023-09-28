@@ -103,6 +103,7 @@ namespace UniversityApp
             this.end = end;
             this.assessmentDetails = assessmentDetails;
             this.courseId = courseId;
+            dueDate = end;
         }
         [PrimaryKey, AutoIncrement]
         public int assessmentId { get; set; }
@@ -114,5 +115,6 @@ namespace UniversityApp
         public int endNotif { get; set; }
         public string assessmentDetails { get; set; }
         public int courseId { get; set; }
+        public DateTime dueDate { get; set; }
     }
 }

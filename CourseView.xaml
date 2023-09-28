@@ -49,6 +49,7 @@
                 <VerticalStackLayout Spacing="5">
                     <Label Text="Course Details" FontSize="Medium" FontAttributes="Bold"/>
                     <Entry Text="Deets" x:Name="courseDetails" TextChanged="courseDetails_TextChanged"/>
+                    <!-- Added course details section instead of launching another page-->
                 </VerticalStackLayout>
             </Border>
             <Border  Stroke="Gray"
@@ -60,8 +61,10 @@
                                 StrokeThickness="3"
                              Padding="5">
                         <VerticalStackLayout>
+                            <!-- Added due dates to assessments-->
                             <Label Text="Performance Assessment" FontSize="Medium"/>
                             <Entry x:Name="paName" Text="Assessment Name" TextChanged="paName_TextChanged"/>
+                            <DatePicker x:Name="paDueDate" DateSelected="paDueDate_DateSelected"></DatePicker>
                             <Label Text="Notify Days Before Start Date:" FontSize="Small" />
                             <Picker x:Name="paStartNotif" SelectedIndexChanged="paStartNotif_SelectedIndexChanged"></Picker>
                             <Label Text="Notify Days Before End Date:" FontSize="Small" />
@@ -74,6 +77,7 @@
                         <VerticalStackLayout>
                             <Label Text="Objective Assessment" FontSize="Medium"/>
                             <Entry x:Name="oaName" Text="Assessment Name" TextChanged="oaName_TextChanged"/>
+                            <DatePicker x:Name="oaDueDate" DateSelected="oaDueDate_DateSelected"></DatePicker>
                             <Label Text="Notify Days Before Start Date:" FontSize="Small" />
                             <Picker x:Name="oaStartNotif" SelectedIndexChanged="oaStartNotif_SelectedIndexChanged" ></Picker>
                             <Label Text="Notify Days Before End Date:" FontSize="Small" />
@@ -88,7 +92,7 @@
                 <VerticalStackLayout Spacing="5">
                     <Label Text="Course Notes" FontSize="Medium" FontAttributes="Bold"/>
                     <VerticalStackLayout x:Name="noteStack">
-
+                        <!-- Changed to programatically create notes as created, inital wireframe was prepared to launch another view-->
                     </VerticalStackLayout>
                     <Entry Text="New Note" x:Name="noteInput"/>
                     <Button Text="Add Note" Clicked="addNote"/>

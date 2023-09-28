@@ -7,7 +7,8 @@ public partial class CourseView : ContentPage
 	public Course currentCourse;
     public Instructor currentInstructor;
     public Assessment PA, OA;
-	public CourseView(int courseId)
+    public SQLiteConnection db = new SQLiteConnection(MainPage.databasePath);
+    public CourseView(int courseId)
 	{
 		InitializeComponent();
 		Course course = MainPage.courseList[courseId];
@@ -28,6 +29,8 @@ public partial class CourseView : ContentPage
         oaEndNotif.ItemsSource = MainPage.notificationValues;
         paStartNotif.ItemsSource = MainPage.notificationValues;
         oaStartNotif.ItemsSource = MainPage.notificationValues;
+        oaDueDate.Date = OA.dueDate;
+        paDueDate.Date = PA.dueDate;
         paEndNotif.SelectedItem = PA.endNotif;
         paStartNotif.SelectedItem = PA.startNotif;
         oaEndNotif.SelectedItem = OA.endNotif;
@@ -108,7 +111,6 @@ public partial class CourseView : ContentPage
 
     private void courseStart_DateSelected(object sender, DateChangedEventArgs e)
     {
-        var db = new SQLiteConnection(MainPage.databasePath);
         bool valid = MainPage.checkDates(courseStart.Date, courseEnd.Date);
 		if (valid)
 		{
@@ -268,6 +270,20 @@ public partial class CourseView : ContentPage
             DataFunctions.updateAssessment(db, PA);
             MainPage.sync_db();
         }
+    }
+
+    private void oaDueDate_DateSelected(object sender, DateChangedEventArgs e)
+    {
+        OA.dueDate = e.NewDate;
+        db.Update(OA);
+        MainPage.sync_db();
+    }
+
+    private void paDueDate_DateSelected(object sender, DateChangedEventArgs e)
+    {
+        PA.dueDate = e.NewDate;
+        db.Update(PA);
+        MainPage.sync_db();
     }
 
     private void oaEndNotif_SelectedIndexChanged(object sender, EventArgs e)

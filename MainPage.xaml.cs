@@ -21,7 +21,8 @@ namespace UniversityApp
         public MainPage()
         {
             InitializeComponent();
-            //addExampleData();
+            //addExampleData function clears DB and replaces with dummy data, comment it out if you want persistence through restarts.
+            addExampleData();
             load_saved_data();
             load_ui(1);
             statusValues.Add("In Progress");

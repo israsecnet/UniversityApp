@@ -7,6 +7,7 @@
         <VerticalStackLayout>
             <ScrollView Orientation="Horizontal">
                 <HorizontalStackLayout x:Name="termStack" Spacing="15" Padding="20">
+                    <!-- Changed to programatically create term buttons-->
                 </HorizontalStackLayout>
             </ScrollView>
             <HorizontalStackLayout Spacing="50" HorizontalOptions="Center">
@@ -25,6 +26,7 @@
                 </HorizontalStackLayout>
             </Border>
             <VerticalStackLayout x:Name="courseStack"  Spacing="30" Padding="20">
+                <!-- Changed to programatically create course buttons-->
             </VerticalStackLayout>
 
         </VerticalStackLayout>
