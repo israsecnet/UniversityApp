@@ -1,4 +1,5 @@
-﻿using SQLite;
+﻿using Plugin.LocalNotification;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,13 @@ namespace UniversityApp
 
     public static class DataFunctions
     {
+
+        public static void deleteNote(Note note)
+        {
+            var db = new SQLiteConnection(MainPage.databasePath);
+            db.Delete(note);
+        }
+
         
         public static void createTable()
         {

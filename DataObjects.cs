@@ -39,6 +39,7 @@ namespace UniversityApp
         public int oa {  get; set; }
         public int startNotification {  get; set; }
         public int endNotification { get; set; }
+
     }
 
     [SQLite.Table("Terms")]
@@ -109,7 +110,8 @@ namespace UniversityApp
         public string assessmentName { get; set; }
         public DateTime start { get; set; }
         public DateTime end { get; set; }
-
+        public int startNotif { get; set; }
+        public int endNotif { get; set; }
         public string assessmentDetails { get; set; }
         public int courseId { get; set; }
     }

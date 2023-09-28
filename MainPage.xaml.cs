@@ -1,4 +1,6 @@
-﻿using SQLite;
+﻿using Plugin.LocalNotification;
+using SQLite;
+using System.Collections;
 using System.Windows.Input;
 
 namespace UniversityApp
@@ -13,6 +15,8 @@ namespace UniversityApp
         public static Dictionary<int, Note> notes = new Dictionary<int, Note>();
         public static Term termSelected;
         public static List<String> statusValues = new List<String>();
+        public static List<int> notificationValues = new List<int>();
+        public static IList<NotificationRequest> notificationRequestsStatic = new List<NotificationRequest>();
         public static string databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "MyData.db");
         public MainPage()
         {
@@ -24,6 +28,143 @@ namespace UniversityApp
             statusValues.Add("Completed");
             statusValues.Add("Dropped");
             statusValues.Add("Plan to Take");
+            notificationValues.Add(0);
+            notificationValues.Add(1);
+            notificationValues.Add(2);
+            notificationValues.Add(3);
+            notificationValues.Add(5);
+            notificationValues.Add(7);
+            notificationValues.Add(14);
+        }
+
+        public async void notificationHander()
+        {
+         
+            notificationRequestsStatic = await LocalNotificationCenter.Current.GetPendingNotificationList();
+            if (await LocalNotificationCenter.Current.AreNotificationsEnabled() == false)
+            {
+                await LocalNotificationCenter.Current.RequestNotificationPermission();
+            }
+
+          
+            List<NotificationRequest> requests = new List<NotificationRequest>();
+            List<int> cancelledRequests = new List<int>();
+            DateTime tmpdt = DateTime.Now;
+            foreach(List<Course> listCourse in courses.Values) 
+            {
+                foreach(Course course in listCourse)
+                {
+                    //Check if course notif time is 0
+                    if (course.startNotification == 0)
+                    {
+                        cancelledRequests.Add(course.courseId + 1000);
+                    }
+                    else
+                    {
+                        NotificationRequest request = new NotificationRequest()
+                        {
+                            NotificationId = course.courseId + 1000,
+                            Title = "Course Starting Reminder",
+                            Description = course.courseName + " Starting soon",
+                            Schedule = new NotificationRequestSchedule()
+                            {
+                                NotifyTime = course.start.AddDays(-course.startNotification).AddHours(tmpdt.Hour).AddMinutes(tmpdt.Minute+1),
+                                RepeatType = NotificationRepeat.Daily
+                            }
+                        };
+                        requests.Add(request);
+                    }
+                    if (course.endNotification == 0)
+                    {
+                        cancelledRequests.Add(course.courseId + 2000);
+                    }
+                    else
+                    {
+                        NotificationRequest request2 = new NotificationRequest()
+                        {
+                            NotificationId = course.courseId + 2000,
+                            Title = "Course Ending Reminder",
+                            Description = course.courseName + " Ending soon",
+                            Schedule = new NotificationRequestSchedule()
+                            {
+                                NotifyTime = course.end.AddDays(-course.endNotification).AddHours(tmpdt.Hour).AddMinutes(tmpdt.Minute+1),
+                                RepeatType = NotificationRepeat.Daily
+                            }
+                        };
+                        requests.Add(request2);
+                    }
+
+                }
+            }
+
+            foreach(Assessment assessment in assessments.Values)
+            {
+                if(assessment.startNotif == 0)
+                {
+                    cancelledRequests.Add(assessment.assessmentId + 3000);
+                }
+                else
+                {
+                    NotificationRequest request = new NotificationRequest()
+                    {
+                        NotificationId = assessment.assessmentId + 3000,
+                        Title = "Assessment Starting Reminder",
+                        Description = assessment.assessmentName + " Starting soon",
+                        Schedule = new NotificationRequestSchedule()
+                        {
+                            NotifyTime = assessment.start.AddDays(-assessment.startNotif).AddHours(tmpdt.Hour).AddMinutes(tmpdt.Minute+1),
+                            RepeatType = NotificationRepeat.Daily
+                        }
+                    };
+                    requests.Add(request);
+                }
+               
+                if(assessment.startNotif == 0)
+                {
+                    cancelledRequests.Add(assessment.assessmentId + 4000);
+                }
+                else
+                {
+                    NotificationRequest request2 = new NotificationRequest()
+                    {
+                        NotificationId = assessment.assessmentId + 4000,
+                        Title = "Assessment Ending Reminder",
+                        Description = assessment.assessmentName + " Ending soon",
+                        Schedule = new NotificationRequestSchedule()
+                        {
+                            NotifyTime = assessment.end.AddDays(-assessment.endNotif).AddHours(tmpdt.Hour).AddMinutes(tmpdt.Minute+1),
+                            RepeatType = NotificationRepeat.Daily
+                        }
+                    };
+                    requests.Add(request2);
+                }
+            }
+            
+            foreach (int i in cancelledRequests)
+            {
+                foreach(NotificationRequest notfi in notificationRequestsStatic)
+                {
+                    if (notfi.NotificationId == i)
+                    {
+                        notfi.Cancel();
+                    }
+                }
+            }
+            foreach (NotificationRequest request in requests)
+            {
+                await LocalNotificationCenter.Current.Show(request);
+
+            }
+        }
+
+   
+
+
+        protected override void OnAppearing()
+        {
+            load_ui(termSelected.termId);
+            notificationHander();
+            
         }
 
         public void addExampleData()
@@ -91,6 +232,11 @@ namespace UniversityApp
             Instructor instructor = new Instructor("Anika Patel", "555-123-4567", "anika.patel@strimeuniversity.edu");
             DataFunctions.addInstructor(db, instructor);
 
+            Note note1 = new Note(1, "Test Note 1");
+            DataFunctions.addNote(db, note1);
+            note1 = new Note(1, "Test Note 2");
+            DataFunctions.addNote(db, note1);
+
         }
 
         private void load_saved_data()
@@ -131,6 +277,7 @@ namespace UniversityApp
             }
         }
 
+     
         public static void sync_db()
         {
             terms = new List<Term>();

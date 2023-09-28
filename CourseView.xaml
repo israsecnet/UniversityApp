@@ -14,8 +14,8 @@
                 <Label Text="Course End Date:" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" FontSize="20"/>
                 <DatePicker x:Name="courseEnd" HorizontalOptions="Center" VerticalOptions="Center" DateSelected="courseEnd_DateSelected"></DatePicker>
             </HorizontalStackLayout>
-            <HorizontalStackLayout>
-                <Label Text="Course Status" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" FontSize="20"/>
+            <HorizontalStackLayout Spacing="15">
+                <Label Text="Course Status:" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" FontSize="20"/>
                 <Picker x:Name="courseStatus" HorizontalOptions="Center" VerticalOptions="Center" SelectedIndexChanged="courseStatus_SelectedIndexChanged"></Picker>
             </HorizontalStackLayout>
             <Border Stroke="Gray"
@@ -36,19 +36,19 @@
                     Padding="5">
                 <VerticalStackLayout>
                     <Label Text="Notifications" FontSize="Medium" FontAttributes="Bold"/>
-                    <Label Text="Start Date Notifications:" FontSize="Small" />
-                    <Picker></Picker>
-                    <Label Text="End Date Notifications:" FontSize="Small" />
-                    <Picker></Picker>
+                    <Label Text="Notify Days Before Start Date:" FontSize="Small" />
+                    <Picker x:Name="courseStartNotif" SelectedIndexChanged="courseStartNotif_SelectedIndexChanged"></Picker>
+                    <Label Text="Notify Days Before End Date:" FontSize="Small" />
+                    <Picker x:Name="courseEndNotif" SelectedIndexChanged="courseEndNotif_SelectedIndexChanged"></Picker>
                 </VerticalStackLayout>
             </Border>
+            
             <Border Stroke="Gray"
-                    StrokeThickness="3"
-                    Padding="5">
+        StrokeThickness="3"
+        Padding="5">
                 <VerticalStackLayout Spacing="5">
-                    <Label Text="Course Notes" FontSize="Medium" FontAttributes="Bold"/>
-                    <Button Text="Add Note"/>
-                    <Button Text="Display Notes"/>
+                    <Label Text="Course Details" FontSize="Medium" FontAttributes="Bold"/>
+                    <Entry Text="Deets" x:Name="courseDetails" TextChanged="courseDetails_TextChanged"/>
                 </VerticalStackLayout>
             </Border>
             <Border  Stroke="Gray"
@@ -61,11 +61,11 @@
                              Padding="5">
                         <VerticalStackLayout>
                             <Label Text="Performance Assessment" FontSize="Medium"/>
-                            <Entry x:Name="paName" Text="Assessment Name"/>
-                            <Label Text="Start Date Notifications:" FontSize="Small" />
-                            <Picker></Picker>
-                            <Label Text="End Date Notifications:" FontSize="Small" />
-                            <Picker></Picker>
+                            <Entry x:Name="paName" Text="Assessment Name" TextChanged="paName_TextChanged"/>
+                            <Label Text="Notify Days Before Start Date:" FontSize="Small" />
+                            <Picker x:Name="paStartNotif" SelectedIndexChanged="paStartNotif_SelectedIndexChanged"></Picker>
+                            <Label Text="Notify Days Before End Date:" FontSize="Small" />
+                            <Picker x:Name="paEndNotif" SelectedIndexChanged="paEndNotif_SelectedIndexChanged"></Picker>
                         </VerticalStackLayout>
                     </Border>
                     <Border  Stroke="Gray"
@@ -73,16 +73,27 @@
                              Padding="5">
                         <VerticalStackLayout>
                             <Label Text="Objective Assessment" FontSize="Medium"/>
-                            <Entry x:Name="oaName" Text="Assessment Name"/>
-                            <Label Text="Start Date Notifications:" FontSize="Small" />
-                            <Picker></Picker>
-                            <Label Text="End Date Notifications:" FontSize="Small" />
-                            <Picker></Picker>
+                            <Entry x:Name="oaName" Text="Assessment Name" TextChanged="oaName_TextChanged"/>
+                            <Label Text="Notify Days Before Start Date:" FontSize="Small" />
+                            <Picker x:Name="oaStartNotif" SelectedIndexChanged="oaStartNotif_SelectedIndexChanged" ></Picker>
+                            <Label Text="Notify Days Before End Date:" FontSize="Small" />
+                            <Picker x:Name="oaEndNotif" SelectedIndexChanged="oaEndNotif_SelectedIndexChanged"></Picker>
                         </VerticalStackLayout>
                     </Border>
                 </VerticalStackLayout>
             </Border>
-            <Button Text="Detailed View" Padding="40"></Button>
+            <Border Stroke="Gray"
+        StrokeThickness="3"
+        Padding="5">
+                <VerticalStackLayout Spacing="5">
+                    <Label Text="Course Notes" FontSize="Medium" FontAttributes="Bold"/>
+                    <VerticalStackLayout x:Name="noteStack">
+
+                    </VerticalStackLayout>
+                    <Entry Text="New Note" x:Name="noteInput"/>
+                    <Button Text="Add Note" Clicked="addNote"/>
+                </VerticalStackLayout>
+            </Border>
         </VerticalStackLayout>
     </ScrollView>
     
