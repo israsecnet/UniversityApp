@@ -29,6 +29,10 @@ public partial class CourseView : ContentPage
         oaEndNotif.ItemsSource = MainPage.notificationValues;
         paStartNotif.ItemsSource = MainPage.notificationValues;
         oaStartNotif.ItemsSource = MainPage.notificationValues;
+        oaStart.Date = OA.start;
+        oaEnd.Date = OA.end;
+        paStart.Date = PA.start;
+        oaEnd.Date = PA.end;
         oaDueDate.Date = OA.dueDate;
         paDueDate.Date = PA.dueDate;
         paEndNotif.SelectedItem = PA.endNotif;
@@ -197,7 +201,6 @@ public partial class CourseView : ContentPage
 
     private void courseStartNotif_SelectedIndexChanged(object sender, EventArgs e)
     {
-        var db = new SQLiteConnection(MainPage.databasePath);
         currentCourse.startNotification = Convert.ToInt32(courseStartNotif.SelectedItem);
         DataFunctions.updateCourse(db, currentCourse);
         MainPage.sync_db();
@@ -205,7 +208,6 @@ public partial class CourseView : ContentPage
     }
     private void courseEndNotif_SelectedIndexChanged(object sender, EventArgs e)
     {
-        var db = new SQLiteConnection(MainPage.databasePath);
         currentCourse.endNotification = Convert.ToInt32(courseEndNotif.SelectedItem);
         DataFunctions.updateCourse(db, currentCourse);
         MainPage.sync_db();
@@ -214,7 +216,6 @@ public partial class CourseView : ContentPage
 
     private void paStartNotif_SelectedIndexChanged(object sender, EventArgs e)
     {
-        var db = new SQLiteConnection(MainPage.databasePath);
         PA.startNotif = Convert.ToInt32(paStartNotif.SelectedItem);
         DataFunctions.updateAssessment(db, PA);
         MainPage.sync_db();
@@ -223,7 +224,6 @@ public partial class CourseView : ContentPage
 
     private void paEndNotif_SelectedIndexChanged(object sender, EventArgs e)
     {
-        var db = new SQLiteConnection(MainPage.databasePath);
         PA.endNotif = Convert.ToInt32(paEndNotif.SelectedItem);
         DataFunctions.updateAssessment(db, PA);
         MainPage.sync_db();
@@ -233,7 +233,6 @@ public partial class CourseView : ContentPage
 
     private void oaStartNotif_SelectedIndexChanged(object sender, EventArgs e)
     {
-        var db = new SQLiteConnection(MainPage.databasePath);
         OA.startNotif = Convert.ToInt32(oaStartNotif.SelectedItem);
         DataFunctions.updateAssessment(db, OA);
         MainPage.sync_db();
@@ -242,7 +241,6 @@ public partial class CourseView : ContentPage
 
     private void courseDetails_TextChanged(object sender, TextChangedEventArgs e)
     {
-        var db = new SQLiteConnection(MainPage.databasePath);
         currentCourse.courseDetails = courseDetails.Text;
         DataFunctions.updateCourse(db, currentCourse);
         MainPage.sync_db();
@@ -251,7 +249,6 @@ public partial class CourseView : ContentPage
 
     private void oaName_TextChanged(object sender, TextChangedEventArgs e)
     {
-        var db = new SQLiteConnection(MainPage.databasePath);
         if (e.NewTextValue != null)
         {
             OA.assessmentName = e.NewTextValue;
@@ -263,7 +260,6 @@ public partial class CourseView : ContentPage
 
     private void paName_TextChanged(object sender, TextChangedEventArgs e)
     {
-        var db = new SQLiteConnection(MainPage.databasePath);
         if (e.NewTextValue != null)
         {
             PA.assessmentName = e.NewTextValue;
@@ -282,6 +278,34 @@ public partial class CourseView : ContentPage
     private void paDueDate_DateSelected(object sender, DateChangedEventArgs e)
     {
         PA.dueDate = e.NewDate;
+        db.Update(PA);
+        MainPage.sync_db();
+    }
+
+    private void oaStart_DateSelected(object sender, DateChangedEventArgs e)
+    {
+        OA.start = e.NewDate;
+        db.Update(OA);
+        MainPage.sync_db();
+    }
+
+    private void oaEnd_DateSelected(object sender, DateChangedEventArgs e)
+    {
+        OA.end = e.NewDate;
+        db.Update(OA);
+        MainPage.sync_db();
+    }
+
+    private void paStart_DateSelected(object sender, DateChangedEventArgs e)
+    {
+        PA.start = e.NewDate;
+        db.Update(PA);
+        MainPage.sync_db();
+    }
+
+    private void paEnd_DateSelected(object sender, DateChangedEventArgs e)
+    {
+        PA.end = e.NewDate;
         db.Update(PA);
         MainPage.sync_db();
     }

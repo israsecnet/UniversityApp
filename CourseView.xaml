@@ -64,7 +64,12 @@
                             <!-- Added due dates to assessments-->
                             <Label Text="Performance Assessment" FontSize="Medium"/>
                             <Entry x:Name="paName" Text="Assessment Name" TextChanged="paName_TextChanged"/>
+                            <Label Text="Due Date"/>
                             <DatePicker x:Name="paDueDate" DateSelected="paDueDate_DateSelected"></DatePicker>
+                            <Label Text="Start Date"/>
+                            <DatePicker x:Name="paStart" DateSelected="paStart_DateSelected"></DatePicker>
+                            <Label Text="End Date"/>
+                            <DatePicker x:Name="paEnd" DateSelected="paEnd_DateSelected"></DatePicker>
                             <Label Text="Notify Days Before Start Date:" FontSize="Small" />
                             <Picker x:Name="paStartNotif" SelectedIndexChanged="paStartNotif_SelectedIndexChanged"></Picker>
                             <Label Text="Notify Days Before End Date:" FontSize="Small" />
@@ -77,7 +82,12 @@
                         <VerticalStackLayout>
                             <Label Text="Objective Assessment" FontSize="Medium"/>
                             <Entry x:Name="oaName" Text="Assessment Name" TextChanged="oaName_TextChanged"/>
+                            <Label Text="Due Date" />
                             <DatePicker x:Name="oaDueDate" DateSelected="oaDueDate_DateSelected"></DatePicker>
+                            <Label Text="Start Date"/>
+                            <DatePicker x:Name="oaStart" DateSelected="oaStart_DateSelected"></DatePicker>
+                            <Label Text="End Date"/>
+                            <DatePicker x:Name="oaEnd" DateSelected="oaEnd_DateSelected"></DatePicker>
                             <Label Text="Notify Days Before Start Date:" FontSize="Small" />
                             <Picker x:Name="oaStartNotif" SelectedIndexChanged="oaStartNotif_SelectedIndexChanged" ></Picker>
                             <Label Text="Notify Days Before End Date:" FontSize="Small" />
