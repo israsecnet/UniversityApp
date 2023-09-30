@@ -158,28 +158,22 @@ namespace UniversityApp
             }
         }
 
-   
-
-
         protected override void OnAppearing()
         {
             load_ui(termSelected.termId);
             notificationHander();
-            
         }
 
         public void addExampleData()
         {
+
             File.Delete(databasePath);
             DataFunctions.createTable();
-
             var db = new SQLiteConnection(databasePath);
-
             Term term1 = new Term("Term 1", DateTime.Now, DateTime.Now.AddMonths(6));
             Term term2 = new Term("Term 2", DateTime.Now, DateTime.Now.AddMonths(6));
             DataFunctions.addTerm(db, term1);
             DataFunctions.addTerm(db, term2);
-
             Course course1 = new Course(1, 1, "Math 101", DateTime.Now, DateTime.Now.AddMonths(4), "In Progress", "Enter Course Details Here:", 1, 2);
             Course course2 = new Course(1, 1, "English 101", DateTime.Now, DateTime.Now.AddMonths(4), "In Progress", "Enter Course Details Here:", 3, 4);
             Course course3 = new Course(1, 1, "Science 101", DateTime.Now, DateTime.Now.AddMonths(4), "In Progress", "Enter Course Details Here:", 1, 1);
@@ -204,7 +198,6 @@ namespace UniversityApp
             DataFunctions.addCourse(db, course4);
             DataFunctions.addCourse(db, course5);
             DataFunctions.addCourse(db, course6);
-
             Assessment PA = new Assessment(1, "Performance Assessment #1", DateTime.Now, DateTime.Now.AddMonths(3), "Enter details about assessment here:", 1);
             Assessment OA = new Assessment(0, "Objective Assessment #1", DateTime.Now, DateTime.Now.AddMonths(3), "Enter details about assessment here:", 1);
             Assessment PA2 = new Assessment(1, "Performance Assessment #1", DateTime.Now, DateTime.Now.AddMonths(3), "Enter details about assessment here:", 2);
@@ -229,15 +222,12 @@ namespace UniversityApp
             DataFunctions.addAssessment(db, OA5);
             DataFunctions.addAssessment(db, PA6);
             DataFunctions.addAssessment(db, OA6);
-
             Instructor instructor = new Instructor("Anika Patel", "555-123-4567", "anika.patel@strimeuniversity.edu");
             DataFunctions.addInstructor(db, instructor);
-
             Note note1 = new Note(1, "Test Note 1");
             DataFunctions.addNote(db, note1);
             note1 = new Note(1, "Test Note 2");
             DataFunctions.addNote(db, note1);
-
         }
 
         private void load_saved_data()
@@ -277,7 +267,6 @@ namespace UniversityApp
                 notes.Add(note.noteId, note);
             }
         }
-
      
         public static void sync_db()
         {
@@ -320,12 +309,12 @@ namespace UniversityApp
             {
                 notes.Add(note.noteId, note);
             }
+            
         }
-
-
 
         public void load_ui(int term)
         {
+
             termStack.Children.Clear();
             courseStack.Children.Clear();
             termSelected = terms[term - 1];
@@ -346,23 +335,84 @@ namespace UniversityApp
                 termStack.Children.Add(button);
             }
 
+            Button buttonTermAdd = new Button()
+            {
+                Text = "Add Term",
+                Padding = 5,
+                BackgroundColor = Microsoft.Maui.Graphics.Colors.LightCoral,
+                TextColor = Microsoft.Maui.Graphics.Colors.Black,
+                CornerRadius = 5,
+            };
+            buttonTermAdd.Clicked += void (sender, args) => onNewTerm();
+            termStack.Children.Add(buttonTermAdd);
+
             //Foreach Course in Term
             foreach (Course course in courses[termSelected])
             {
+                Grid grid = new Grid
+                {
+                    BackgroundColor = Colors.White
+                };
                 //Add Course Button
                 Button button = new Button
                 {
                     Text = course.courseName
                 };
+                grid.Add(button);
+                SwipeItem deleteItem = new SwipeItem
+                {
+                    Text = "Delete",
+                    BindingContext = course,
+                    BackgroundColor = Colors.LightCoral
+
+                };
+                deleteItem.Invoked += onDeleteInvoked;
+                List<SwipeItem> items = new List<SwipeItem>() {deleteItem };
+                SwipeView swp = new SwipeView
+                {
+                    RightItems = new SwipeItems(items),
+                    Content = grid
+                };
                 button.Clicked += async (sender, args) => await Navigation.PushAsync(new CourseView(course.courseId));
-                courseStack.Children.Add(button);
+
+                courseStack.Children.Add(swp);
             }
+            if (courses[termSelected].Count < 6) 
+            {
+                Button buttonCourseAdd = new Button()
+                {
+                    Text = "Add Course",
+                };
+                buttonCourseAdd.Clicked += void (sender, args) => onNewCourse();
+                courseStack.Children.Add(buttonCourseAdd);
+            }
+           
+            
             termStart.Date = termSelected.start;
             termEnd.Date = termSelected.end;
             termTitle.Text = termSelected.termName;
 
         }
-         public static bool checkDates(DateTime start, DateTime end)
+
+        public void onNewCourse()
+        {
+            DataFunctions.addNewCourse(termSelected.termId);
+            load_ui(termSelected.termId);
+        }
+        public void onNewTerm()
+        {
+            DataFunctions.addNewTerm();
+            load_ui(termSelected.termId);
+        }
+            private void onDeleteInvoked(object sender, EventArgs e)
+        {
+            var item = sender as SwipeItem;
+            var course = item.BindingContext as Course;
+            DataFunctions.deleteCourse(course);
+            MainPage.sync_db();
+            load_ui(termSelected.termId);
+        }
+            public static bool checkDates(DateTime start, DateTime end)
         {
             if (end < start)
             {

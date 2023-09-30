@@ -79,7 +79,7 @@ public partial class CourseView : ContentPage
                 List<SwipeItem> items = new List<SwipeItem>() { shareItem, deleteItem };
                 Grid grid = new Grid
                 {
-                    BackgroundColor = Colors.LightCoral
+                    BackgroundColor = Colors.LightBlue
                 };
                 grid.Add(new Label
                 {

@@ -18,7 +18,52 @@ namespace UniversityApp
             db.Delete(note);
         }
 
-        
+        public static void deleteCourse(Course course)
+        {
+            var db = new SQLiteConnection(MainPage.databasePath);
+            db.Delete(course);
+        }
+
+        public static void addNewTerm()
+        {
+            var db = new SQLiteConnection(MainPage.databasePath);
+            var resp = db.Query<Term>($"SELECT * FROM Terms ORDER BY termId DESC LIMIT 1");
+            Term nt = resp.First();
+            string termName = "Term " + (nt.termId+1).ToString();
+            Term rt = new Term(termName, DateTime.Now, DateTime.Now.AddDays(60));
+            db.Insert(rt);
+            MainPage.sync_db();
+        }
+
+        public static void addNewCourse(int termId)
+        {
+            var db = new SQLiteConnection(MainPage.databasePath);
+            Assessment PA = new Assessment(1, "PerformanceAssessment23", DateTime.Now, DateTime.Now.AddMonths(3), "Enter details about assessment here:", 1);
+            Assessment OA = new Assessment(0, "ObjectiveAssessment23", DateTime.Now, DateTime.Now.AddMonths(3), "Enter details about assessment here:", 1);
+            Course course1 = new Course(termId, 1, "NewCourse23", DateTime.Now, DateTime.Now.AddMonths(4), "Plan to Take", "Enter Course Details Here:", 1, 2);
+            addCourse(db, course1);
+            List<Course> resp = db.Query<Course>($"SELECT courseId FROM Courses WHERE courseName='NewCourse23'");
+            PA.courseId = resp[0].courseId;
+            OA.courseId = resp[0].courseId;
+            addAssessment(db, PA);
+            addAssessment(db, OA);
+            List<Assessment> resp2 = db.Query<Assessment>($"SELECT assessmentId FROM Assessments WHERE courseId='{resp[0].courseId.ToString()}'");
+            foreach (Assessment a in resp2)
+            {
+                if (a.type == 1)
+                {
+                    course1.pa = a.assessmentId;
+                }
+                else
+                {
+                    course1.oa = a.assessmentId;
+                }
+            }
+            db.Update(course1);
+            MainPage.sync_db();
+
+
+        }
         public static void createTable()
         {
             var databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "MyData.db");

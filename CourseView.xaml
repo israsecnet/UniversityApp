@@ -99,7 +99,7 @@
             <Border Stroke="Gray"
         StrokeThickness="3"
         Padding="5">
-                <VerticalStackLayout Spacing="5">
+                <VerticalStackLayout Spacing="10">
                     <Label Text="Course Notes" FontSize="Medium" FontAttributes="Bold"/>
                     <VerticalStackLayout x:Name="noteStack">
                         <!-- Changed to programatically create notes as created, inital wireframe was prepared to launch another view-->
