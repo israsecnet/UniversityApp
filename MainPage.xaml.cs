@@ -386,8 +386,19 @@ namespace UniversityApp
                 buttonCourseAdd.Clicked += void (sender, args) => onNewCourse();
                 courseStack.Children.Add(buttonCourseAdd);
             }
-           
+            if (courses[termSelected].Count == 0)
+            {
+                Button buttonTermRemove = new Button()
+                {
+                    Text = "Delete Term",
+                    BackgroundColor = Colors.Red
+                };
+                buttonTermRemove.Clicked += void (sender, args) => onTermDelete();
+                courseStack.Children.Add(buttonTermRemove);
+            }
             
+
+
             termStart.Date = termSelected.start;
             termEnd.Date = termSelected.end;
             termTitle.Text = termSelected.termName;
@@ -403,6 +414,13 @@ namespace UniversityApp
         {
             DataFunctions.addNewTerm();
             load_ui(termSelected.termId);
+        }
+        public void onTermDelete()
+        {
+            var db = new SQLiteConnection(databasePath);
+            db.Delete(termSelected);
+            sync_db();
+            load_ui(1);
         }
             private void onDeleteInvoked(object sender, EventArgs e)
         {
